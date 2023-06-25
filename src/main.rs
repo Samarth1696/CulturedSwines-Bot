@@ -52,7 +52,7 @@ impl EventHandler for Handler {
 
 #[tokio::main]
 async fn main() {
-    let token = "";
+    let token = "OTU5NzA0NzQyNzI3MTI3MTAw.G7K4Qf.3ZjbnO8jzTe6DZ92kkBCLMxmL875Tu4U3S8Ghc";
 
     let mut client = Client::new(&token)
         .event_handler(Handler)
