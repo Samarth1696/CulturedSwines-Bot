@@ -27,7 +27,7 @@ I hope that resolves your issue!
 — HelpBot 🤖
 ";
 
-const HELP_COMMAND: &str = "!help";
+const HELP_COMMAND: &str = "Thelp";
 
 #[async_trait]
 impl EventHandler for Bot {
