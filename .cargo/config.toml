@@ -1,4 +1,4 @@
 [patch.crates-io]
-shuttle-proto = { path = "proto" }
-shuttle-runtime = { path = "runtime" }
-shuttle-service = { path = "service" }
+shuttle-proto = { path = "./proto" }
+shuttle-runtime = { path = "./runtime" }
+shuttle-service = { path = "./service" }
