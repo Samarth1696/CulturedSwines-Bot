@@ -1,4 +1,4 @@
 [patch.crates-io]
-shuttle-proto = { path = "../shuttle/proto" }
-shuttle-runtime = { path = "../shuttle/runtime" }
-shuttle-service = { path = "../shuttle/service" }
+shuttle-proto = { git = "https://github.com/Samarth1696/shuttle.git" }
+shuttle-runtime = { git = "https://github.com/Samarth1696/shuttle.git" }
+shuttle-service = { git = "https://github.com/Samarth1696/shuttle.git" }
