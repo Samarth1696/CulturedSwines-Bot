@@ -22,6 +22,16 @@ const PREFIX: &str = "!";
 #[async_trait]
 impl EventHandler for Bot {
     async fn message(&self, ctx: Context, msg: Message) {
+        if msg.author.id == 740203174836830229 {
+            if let Err(why) = msg.channel_id.say(&ctx.http, "<@740203174836830229> https://media.giphy.com/media/UThvDeKMTfsj67t7nG/giphy-downsized-large.gif").await {
+                println!("Gawar Developer.. mera code ekbar check karle.. iss suvar ko msg nahi kar pa raha hu! : {:?}", why);
+            }
+        }
+
+        if !msg.content.starts_with(PREFIX) {
+            return; // Ignore the message if it doesn't start with the prefix
+        }
+
         let username = msg.author.name;
         let file_path = format!("{}.json", username);
 
@@ -77,19 +87,8 @@ impl EventHandler for Bot {
             conversation: conv,
         };
 
-        if msg.author.id == 740203174836830229 {
-            if let Err(why) = msg.channel_id.say(&ctx.http, "<@740203174836830229> https://media.giphy.com/media/UThvDeKMTfsj67t7nG/giphy-downsized-large.gif").await {
-                println!("Gawar Developer.. mera code ekbar check karle.. iss suvar ko msg nahi kar pa raha hu! : {:?}", why);
-            }
-        }
-
-        if !msg.content.starts_with(PREFIX) {
-            return; // Ignore the message if it doesn't start with the prefix
-        }
-
         let command = &msg.content[PREFIX.len()..].trim();
 
-        print!("Command: {}", command);
         match command {
             &"help" => {
                 if let Err(why) = msg.channel_id.say(&ctx.http, HELP_MESSAGE).await {
@@ -97,7 +96,7 @@ impl EventHandler for Bot {
                 }
             }
             _ => {
-            let typing = ctx.http.start_typing(msg.channel_id.into());
+                let typing = ctx.http.start_typing(msg.channel_id.into());
                 let response: CompletionResponse = bot
                     .conversation
                     .send_message(msg.content)
@@ -123,6 +122,35 @@ impl EventHandler for Bot {
                             })
                     })
                     .await;
+                // Read the file content
+                let file_content = fs::read_to_string(file_path).await;
+
+                let mut json_value: Value = match serde_json::from_str(&file_content.unwrap()) {
+                    Ok(value) => value,
+                    Err(err) => {
+                        eprintln!("Error parsing JSON: {}", err);
+                        return;
+                    }
+                };
+
+                // Delete objects with role "user" or "assistant"
+                if let Some(json_array) = json_value.as_array_mut() {
+                    let count = json_array.len();
+                    if count > 23 {
+                        json_array.retain(|obj| {
+                            let role = obj.get("role").and_then(|r| r.as_str());
+                            role != Some("user") && role != Some("assistant")
+                        });
+                    } else {
+                        return;
+                    }
+                }
+
+                // Convert the JSON value back to a string
+                let updated_file_content = serde_json::to_string_pretty(&json_value);
+
+                // Write the updated content back to the file
+                fs::write(format!("{}.json", username), updated_file_content.unwrap()).await;
             }
         }
     }
