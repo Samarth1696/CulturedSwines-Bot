@@ -1,7 +1,7 @@
 use anyhow::anyhow;
 use chatgpt::prelude::*;
 use chatgpt::types::CompletionResponse;
-use serde_json::{json, Value};
+use serde_json::{Value};
 use serenity::async_trait;
 use serenity::model::channel::Message;
 use serenity::model::gateway::Ready;
