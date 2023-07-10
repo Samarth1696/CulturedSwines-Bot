@@ -136,7 +136,7 @@ impl EventHandler for Bot {
                 // Delete objects with role "user" or "assistant"
                 if let Some(json_array) = json_value.as_array_mut() {
                     let count = json_array.len();
-                    if count > 23 {
+                    if count > 81 {
                         json_array.retain(|obj| {
                             let role = obj.get("role").and_then(|r| r.as_str());
                             role != Some("user") && role != Some("assistant")
