@@ -22,11 +22,6 @@ const PREFIX: &str = "!";
 #[async_trait]
 impl EventHandler for Bot {
     async fn message(&self, ctx: Context, msg: Message) {
-        if msg.author.id == 740203174836830229 {
-            if let Err(why) = msg.channel_id.say(&ctx.http, "<@740203174836830229>").await {
-                println!("Gawar Developer.. mera code ekbar check karle.. iss suvar ko msg nahi kar pa raha hu! : {:?}", why);
-            }
-        }
 
         if !msg.content.starts_with(PREFIX) {
             return; // Ignore the message if it doesn't start with the prefix
