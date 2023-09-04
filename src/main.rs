@@ -23,7 +23,7 @@ const PREFIX: &str = "!";
 impl EventHandler for Bot {
     async fn message(&self, ctx: Context, msg: Message) {
         if msg.author.id == 740203174836830229 {
-            if let Err(why) = msg.channel_id.say(&ctx.http, "<@740203174836830229> https://media.giphy.com/media/UThvDeKMTfsj67t7nG/giphy-downsized-large.gif").await {
+            if let Err(why) = msg.channel_id.say(&ctx.http, "<@740203174836830229>").await {
                 println!("Gawar Developer.. mera code ekbar check karle.. iss suvar ko msg nahi kar pa raha hu! : {:?}", why);
             }
         }
