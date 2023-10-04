@@ -24,7 +24,7 @@ This is a Discord chat bot implemented in Rust using the Serenity library and th
   ```
 2. Change into the project directory:
   ```bash
-  cd discord-chat-bot
+  cd CulturedSwines-Bot
   ```
 3. Install the dependencies and run the project using Cargo shuttle:
   ```bash
