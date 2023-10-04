@@ -19,9 +19,9 @@ This is a Discord chat bot implemented in Rust using the Serenity library and th
 ## Installation
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/discord-chat-bot.git
-   ```
+  ```bash
+  git clone https://github.com/Samarth1696/CulturedSwines-Bot.git
+  ```
 2. Change into the project directory:
   ```bash
   cd discord-chat-bot
